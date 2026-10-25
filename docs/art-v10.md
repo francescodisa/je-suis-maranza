@@ -1,0 +1,41 @@
+# Je suis Maranza — art v10
+
+## Provenance and integration
+
+Created with the built-in OpenAI image generation tool, using local images as style references. No Krea, Fal, paid third-party media service, programmatic drawing, or post-generation image editing was used. The selected generated PNGs were copied unchanged into the game assets.
+
+| Asset | Dimensions | Format | Layout |
+| --- | --- | --- | --- |
+| `dist/assets/bosses-v10.png` | 1774 × 887 | PNG RGBA | 4 equal columns × 2 equal rows |
+| `dist/assets/story-v10.png` | 1672 × 941 | PNG RGB | 2 equal columns × 2 equal rows |
+
+Boss atlas row 0 is Trump; row 1 is the President/Netanyahu caricature. Columns are closed gold armor, exposed blue machinery, right-facing escape pose 1, right-facing escape pose 2. Both characters are upright and uninjured outside their mechanical armor. The escape poses differ subtly in body angle and proportions rather than a complete opposite-leg gait. The renderer can combine them with horizontal movement and a small running bob.
+
+The sprite source includes extremely faint alpha noise below 9/255 outside visible figures. Use an alpha threshold of at least 20 for bounding-box discovery. At threshold 20, no visible sprite crosses its regular cell boundary. The narrowest bottom margin of a top-row visible figure is 10 pixels. Dimensions are not evenly divisible by the grid; calculate cell edges with floor/round consistently.
+
+Story order: Trump speech (top left), Trump escapes to his limousine (top right), President escapes to his car (bottom left), the two protagonists join a peaceful civic crowd at dawn (bottom right). The visual division is x=836, y=470; fractional source slicing at half height is also suitable.
+
+## References and generated files
+
+- Boss style reference: `dist/assets/boss.png`.
+- Story style and protagonist reference: `dist/assets/story-v3.png`.
+- Initial boss generation: `/workspace/scratch/9996f2e7c828/generated_images/exec-9282c67a-d159-4431-bcbc-93f9b624741e.png`. Rejected for overlapping regular cell boundaries.
+- Final boss correction: `/workspace/scratch/9996f2e7c828/generated_images/exec-e0ffb646-6d11-4897-9dbf-895c895a33dd.png`.
+- Final story generation: `/workspace/scratch/9996f2e7c828/generated_images/exec-f48018c5-ae64-4a3a-9164-e5ed8dbc4b90.png`.
+
+Visual inspection confirmed readable isolated characters, clear unharmed escapes, matching pixel-art style, a peaceful epilogue, and no gore. Pixel metadata and per-cell alpha bounds were inspected with Pillow without modifying images.
+
+## Exact prompts
+
+### Initial sprite atlas
+
+Use case: style-transfer. Asset type: game-ready transparent sprite atlas, original satirical arcade Je suis Maranza. Edit and expand the provided boss sprite reference into a NEW exact FOUR COLUMNS by TWO ROWS atlas, eight equal cells, with truly transparent background and generous empty padding inside every cell. Preserve its meticulous crisp chunky pixel art, dark outlines and warm gold/navy palette, no antialias or painterly blur. Each cell contains one COMPLETE isolated figure and no loose detached pieces. TOP ROW depicts recognizable Donald Trump, swept blond hair, navy suit white shirt red tie. Column 1: inside bulky absurd GOLD MECHANICAL ARMOR with head above it, closed chest, complete feet visible, facing right in three-quarter side view. Column 2: identical gold armor with front chest panels open showing harmless blue glowing machinery, head and face unchanged, no wounds. Column 3: Trump OUT OF THE ARMOR, full body in navy suit and red tie, comically RUNNING RIGHT with arms pumping, first stride. Column 4: same full-body suit-clad Trump RUNNING RIGHT, opposite leg stride. BOTTOM ROW depicts recognizable Benjamin Netanyahu, silver grey combed hair, navy suit white shirt blue tie; the SAME FOUR POSITIONS: gold armor closed, gold armor open machinery, unharmed suit-clad RUN RIGHT stride one, RUN RIGHT stride two. Both running figures must look intact and energetic, fleeing in embarrassment, NOT hurt, wounded, unconscious or falling. Mechanical armor is a theatrical protective prop, no cannons, guns or other firearms. Consistent character size in matched pose pairs, flat ground line per row. Entire silhouettes within their equal cell boundaries, clear transparent gaps, no overlap. No text, no labels, no borders, no checkerboard painted in background, no glow on transparent space, no shadows crossing cells. Wide landscape sheet with eight cleanly separable sprites.
+
+### Sprite layout correction
+
+Repair this transparent pixel-art sprite sheet for a real game engine. The current sprites are too big and cross their cell boundaries. Keep all eight characters and their exact appearance, but RECOMPOSE AS A PRECISE 4 COLUMN × 2 ROW UNIFORM GRID. Every cell has exactly the same width and height. Canvas landscape 2:1. Each sprite must fit in the CENTER 70% of its own equal square cell, leaving at least 15% padding on ALL FOUR SIDES. No pixel from a sprite may touch any cell edge. Top row Donald Trump, bottom row Benjamin Netanyahu. Column 1 gold mechanical armor closed. Column 2 gold mechanical armor open showing blue mechanism. Column 3 unharmed man running RIGHT, RIGHT knee forward with LEFT leg back. Column 4 same unharmed man running RIGHT, LEFT knee forward with RIGHT leg back, also opposite arm swing from column 3. Ensure distinct run strides. Solid crisp dark outlines and chunky golden arcade pixels. The eight isolated figures may be SMALLER to guarantee generous padding. Preserve true transparent background, no labels, no guide lines, no painted checkerboard, no shadows, no guns, no violence or injury. Uniform cell centers at x=12.5%,37.5%,62.5%,87.5% of canvas width; y=25%,75% of canvas height. ALL bounding boxes limited to at most 17.5% canvas width and 35% canvas height. Important: empty transparent margins between EVERY sprite are more important than filling canvas. No overlaps. Each complete head, foot, and armor shoulder must be visible inside its own square.
+
+### Narrative atlas
+
+Use case: style-transfer. Asset type: four narrative cutscenes for original satirical pixel-art arcade Je suis Maranza. Edit the provided narrative atlas into FOUR NEW illustrations, preserving its pixel-art visual language and recurring protagonist designs. Exact TWO COLUMNS by TWO ROWS equal grid, overall wide 16:9, each quadrant itself complete 16:9; edge to edge with NO gutters, borders, captions, speech, text, letters, logos or UI. Deliberate chunky pixel clusters, expressive faces, dark outlines, limited warm gold/coral and navy palette, rich arcade architecture, no smooth painted rendering. Recurring protagonists are an adult dark-haired man in a royal blue tracksuit with white stripes and black crossbody bag, and Nora, adult brown-skinned woman with high dark ponytail, red bomber jacket, gold hoop earrings and charcoal trousers. TOP LEFT: recognizable Donald Trump with swept blond hair and navy suit/red tie gesticulating at absurd GOLD PRESIDENTIAL PODIUM outside lavish financial-district towers at evening, his gold mechanical armor parked beside him; the two protagonists visible at the bottom edge looking toward him. TOP RIGHT: unmistakably unharmed Trump RUNNING toward the open door of a lavish gold limousine, glancing back with comically alarmed expression, suit and red tie intact, his abandoned gold mechanical armor in the distance, tiny paper sheets in the air. No one strikes or pursues him with weapons. BOTTOM LEFT: recognizable unharmed Benjamin Netanyahu with silver-grey combed hair, navy suit and blue tie RUNNING through the open palace exit toward a waiting black car, clearly comic fleeing motion, abandoned inactive gold mechanical armor behind him, intact uninjured body. BOTTOM RIGHT: epilogue at dawn, both recurring protagonists standing upright together in the near foreground, seen three-quarter from behind with faces partly visible; a varied peaceful civic crowd heads along a LONG CITY AVENUE toward the horizon. Warm early sun, detailed Italian streets and distant buildings, quiet hopeful but unfinished journey. No fighting in any panel, no blood, wounds, bodies on the ground, physical humiliation, or weapons aimed at persons. Recognizable political cartoon fiction, high artistic care and readable silhouettes.
+

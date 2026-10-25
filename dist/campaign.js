@@ -1,0 +1,40 @@
+// One shared map for simulation, backgrounds and the campaign interface.
+export const WORLD_WIDTH = 3000;
+export const CENTERS = [460, 1180, 1900, 2600];
+export const GATES = [760, 1480, 2210, 2830];
+export const LEVELS = [
+ {name:'01 · LA STRADA',subtitle:"Le pattuglie avanzano. Cerca un passaggio e tieni d’occhio chi resta indietro.",
+  types:['bin','car','vending','car'],extras:['vending','bin','bin','vending'],
+  guards:[['cop','cop'],['cop','cop','cop'],['cop','shield','cop'],['shield','cop','cop']],waves:[[],['cop','cop'],[],['cop','shield']],
+  scenery:{sheet:'streetA',row:0,rows:2,floor:.744},wealth:0,music:0,
+  nextTitle:"Il corso è ancora aperto.",nextCopy:"Le serrande si abbassano, ma qualcuno resta sulla porta. Il corteo si ricompone fra le fermate dell’autobus."},
+ {name:'02 · IL CORSO',subtitle:"Il corteo si è diviso. Raggiungi gli altri sul corso.",
+  types:['car','vending','coupe','window'],extras:['vending','car','window','coupe'],
+  guards:[['cop','cop','cop'],['shield','cop','cop'],['cop','shield','cop'],['shield','cop','shield']],waves:[[],['cop','cop'],[],['shield','cop']],
+  scenery:{sheet:'streetC',row:0,rows:3,floor:.72},wealth:1,music:0,
+  nextTitle:"Da qui cominciano le vetrine di lusso.",nextCopy:"Sotto i portici della galleria le auto costano di più. Anche la sorveglianza sembra adeguarsi ai prezzi."},
+ {name:'03 · VIA DEL PRIVILEGIO',subtitle:"Ogni vetrina ha la sua scorta.",
+  types:['coupe','tesla','window','watch'],extras:['window','bag','tesla','bag'],
+  guards:[['shield','cop','cop'],['shield','shield','cop'],['cop','shield','cop','cop'],['shield','cop','shield','cop']],waves:[[],['shield','cop'],[],['shield','cop']],
+  scenery:{sheet:'streetA',row:1,rows:2,floor:.75},wealth:2,music:0,
+  nextTitle:"Una notte costa un anno di lavoro",nextCopy:"Dietro la galleria c’è il Grand Hotel. Il corteo passa davanti all’ingresso, proprio mentre arrivano gli ospiti."},
+ {name:'04 · GRAND HOTEL',subtitle:"Cinque stelle, quattro posti di blocco. Cerca spazio fra le scorte.",
+  types:['tesla','bag','cybertruck','clock'],extras:['watch','tesla','watch','bag'],
+  guards:[['shield','cop','shield'],['shield','cop','soldier','cop'],['shield','soldier','cop','shield'],['soldier','shield','cop','shield']],waves:[[],['shield','cop'],[],['soldier','shield']],
+  scenery:{sheet:'streetC',row:1,rows:3,floor:.72},wealth:3,music:0,
+  nextTitle:"Il corteo arriva al porto.",nextCopy:"Dalle cucine dell’hotel si esce sulla banchina. Gli yacht sono illuminati; chi li pulisce sta ancora lavorando."},
+ {name:'05 · IL PORTO PRIVATO',subtitle:"La banchina è pubblica. Il cancello è privato.",
+  types:['cybertruck','watch','supercar','safe'],extras:['bag','cybertruck','watch','clock'],
+  guards:[['soldier','shield','cop','soldier'],['soldier','shield','soldier','shield'],['elite','soldier','shield','cop'],['soldier','elite','shield','soldier']],waves:[[],['soldier','shield'],[],['elite','soldier']],
+  scenery:{sheet:'streetC',row:2,rows:3,floor:.72},wealth:4,music:1,
+  nextTitle:"Segui il denaro.",nextCopy:"Oltre il porto si alzano le torri delle banche. Comincia a piovere; gli agenti sono già schierati davanti agli ingressi."},
+ {name:'06 · CAPITALE BLINDATO',subtitle:"Trump ha blindato il passaggio. La sua corazza si apre fra un attacco e l’altro.",
+  types:['supercar','safe','clock',null],extras:['cybertruck','watch','safe',null],
+  guards:[['soldier','elite','shield','soldier'],['elite','soldier','elite','shield'],['soldier','elite','shield','soldier'],['elite','elite','soldier','shield','cop']],waves:[[],['elite','soldier'],[],['soldier','elite']],
+  scenery:{sheet:'streetB',row:0,rows:2,floor:.685},wealth:5,music:1,rain:true,bossKind:'trump',
+  nextTitle:"Trump è scappato. Il corteo riparte.",nextCopy:"La corazza è fuori uso e la limousine si allontana. Davanti al palazzo del Presidente si sentono ancora esplosioni."},
+ {name:'07 · IL PALAZZO BLINDATO',subtitle:"Il bombardamento continua. Raggiungi il palazzo.",
+  types:['limo','statue','safe',null],extras:['clock','safe','limo',null],
+  guards:[['elite','soldier','shield','soldier'],['elite','elite','soldier','shield'],['elite','soldier','elite','shield','soldier'],[]],waves:[[],['elite','soldier'],['soldier','shield'],[]],
+  scenery:{sheet:'streetB',row:1,rows:2,floor:.81},wealth:6,music:1,final:true,bossKind:'president'}
+];

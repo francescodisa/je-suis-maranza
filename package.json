@@ -1,0 +1,15 @@
+{
+  "name": "je-suis-maranza",
+  "version": "6.2.1",
+  "private": true,
+  "type": "module",
+  "description": "A satirical pixel-art smash and evade arcade",
+  "scripts": {
+    "check": "node --check dist/engine.js && node --check dist/renderer.js && node --check dist/main.js && node --check dist/story.js && node --check dist/campaign.js && node --check dist/audio.js && node --check dist/mobile.js && node --check dist/save.js",
+    "test": "node tests/engine.test.mjs && node tests/story.test.mjs && node tests/audio.test.mjs && node tests/mobile.test.mjs && node tests/balance.test.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

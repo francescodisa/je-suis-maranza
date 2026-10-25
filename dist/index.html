@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15141a"><meta name="description" content="Je suis Maranza. Un gioco arcade satirico in pixel art: raggiungi l’uscita, evita le cariche e trova la motivazione per farti ascoltare.">
+<title>Je suis Maranza — Il privilegio ha i vetri fragili</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2315141a'/%3E%3Ctext x='10' y='48' font-size='48' font-family='sans-serif' font-weight='900' fill='%23ff6554'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<main class="app">
+<header class="masthead"><a class="wordmark" href="./" aria-label="Je suis Maranza, inizio">JE SUIS <strong>MARANZA</strong><span class="version">INSIEME / 13</span></a><div class="utilities"><button id="helpBtn" title="Comandi" aria-label="Mostra comandi">?</button><button id="musicBtn" class="audio-toggle" aria-label="Disattiva musica" aria-pressed="true" title="Musica">♫ MUSICA ON</button><button id="audioBtn" class="audio-toggle" aria-label="Disattiva effetti sonori" aria-pressed="true" title="Effetti sonori">FX ON</button><button id="pauseBtn" aria-label="Pausa" title="Pausa (Esc)">Ⅱ</button><button id="fullBtn" aria-label="Schermo intero" title="Schermo intero">⛶</button></div></header>
+<section class="cabinet" id="cabinet" aria-label="Area di gioco">
+<canvas tabindex="0" id="game" width="960" height="540" aria-label="Gioco arcade a scorrimento. Frecce o WASD per muoverti, J rompe gli oggetti, K tenuto protegge dai colpi, spazio salta, L convince gli agenti."></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="hud" id="hud" hidden>
+<div class="hud-player"><div class="hud-label"><b id="playerName">MARANZA</b><span id="hpText">100 / 100</span></div><div class="meter health"><i id="healthBar"></i></div><div class="motivation-label"><span>MOTIVAZIONE</span><span id="motivationText">100</span></div><div class="meter motivation"><i id="motivationBar"></i></div></div>
+<div class="hud-center"><span id="stageNumber">ATTO 01 / 07</span><strong id="stageName">LA STRADA</strong><div class="alarm"><span>ALLARME</span><div class="meter"><i id="alarmBar"></i></div></div></div>
+<div class="hud-score"><span>PUNTI</span><strong id="score">000000</strong><small>RECORD <span id="record">000000</span></small><b id="combo"></b></div>
+</div>
+<div id="targetHud" class="target-hud" hidden><small>BERSAGLIO</small><strong id="targetName">AVVICINATI A UN OGGETTO</strong><div class="meter"><i id="targetBar"></i></div></div>
+<button id="menuBtn" class="game-menu-button" hidden aria-label="Apri menu di gioco" aria-controls="pauseScreen">Ⅱ <span>MENU</span></button>
+<div id="rotateHint" class="rotate-hint" hidden><span>↻ Ruota il telefono per vedere meglio la strada.</span><button id="dismissRotate" aria-label="Nascondi il suggerimento di rotazione">×</button></div>
+<div id="objectiveHint" class="objective-hint" hidden></div>
+<div id="speechHud" class="speech-hud" hidden role="status" aria-live="polite"><strong id="speechSpeaker" aria-hidden="true"></strong><p id="speechText" aria-hidden="true"></p><span id="speechAccessible" class="sr-only"></span></div>
+<div id="toast" class="toast" hidden role="status"></div>
+<div id="direction" class="direction" hidden>AVANTI <b>→</b></div>
+<div class="touch-controls" id="touchControls" hidden>
+<div class="joystick" id="joystick" aria-label="Joystick movimento"><span class="cross">✚</span><i id="stick"></i></div>
+<div class="touch-actions"><button data-action="special" class="special" aria-label="Convinci gli agenti vicini"><b id="touchEnergy">100</b><span>CONVINCI</span></button><button data-action="jump" class="jump" aria-label="Salta">↑<span>SALTO</span></button><button data-action="punch" class="punch" aria-label="Spacca gli oggetti, tieni premuto"><b>✦</b><span id="attackLabel">SPACCA</span></button><button data-action="kick" class="kick" aria-label="Proteggiti, tieni premuto"><b id="touchStamina" aria-hidden="true"><svg viewBox="0 0 24 28" width="24" height="28" focusable="false"><path d="M12 2 22 6v8c0 6-5 10-10 12C7 24 2 20 2 14V6Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="m7 14 3 3 7-8" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></b><span>PROTEGGI</span></button></div>
+</div>
+<div class="overlay title-screen" id="titleScreen">
+<div class="title-content"><div class="eyebrow"><i></i> SETTE ATTI. LA STRADA SI FA COSTOSA.</div><h1>JE SUIS<br><em>MARANZA</em></h1><p class="tagline">Il privilegio ha i vetri fragili.</p><p class="intro">Attraversa la città e raggiungi il corteo. Schiva le cariche, tieniti lontano dalle manette e conserva abbastanza motivazione per farti ascoltare.</p><div class="start-row"><button id="startBtn" class="primary" disabled>INIZIA <span>→</span></button><label class="difficulty"><span>DIFFICOLTÀ</span><select id="difficulty"><option value="facile">Facile</option><option value="normale" selected>Normale</option><option value="difficile">Difficile</option></select></label></div><p id="difficultyHint" class="difficulty-hint">Pattuglie più rapide, prese frequenti e meno recuperi.</p><button id="loadBtn" class="load-run" hidden>RIPRENDI LA PARTITA</button><button id="galleryBtn" class="gallery-link" disabled>LE SCENE <span>▸</span></button><div class="title-controls"><span><kbd>W A S D</kbd> / <kbd>↑ ↓ ← →</kbd> MUOVI</span><span><kbd>J</kbd> SPACCA</span><span><kbd>K</kbd> PROTEGGI</span><span><kbd>SPAZIO</kbd> SALTO</span><span><kbd>L</kbd> CONVINCI</span></div><div class="mobile-note">Su telefono, gioca in orizzontale. Comandi touch inclusi.</div></div><div class="title-stamp">SETTE ATTI.<br><b>LA STRADA<br>SI FA COSTOSA.</b></div>
+<div class="title-bottom"><span>ILLUSTRAZIONI PIXEL / SATIRA ARCADE</span><span>UNA FINZIONE SATIRICA</span></div>
+</div>
+<div class="overlay story-screen" id="storyScreen" hidden role="dialog" aria-modal="true" aria-labelledby="storyChapter">
+ <div class="story-panel">
+  <div class="story-top"><div><span class="story-kicker">JE SUIS MARANZA</span><h2 id="storyChapter"></h2></div><button id="storySkip" class="pixel-button" aria-label="Salta la scena">SALTA SCENA <span>ESC</span></button></div>
+  <div class="story-dialog"><div class="story-meta"><strong id="storySpeaker"></strong><span id="storyCount"></span></div><p id="storyText" aria-hidden="true"></p><p id="storyAccessible" class="sr-only" role="status"></p><div class="story-bottom"><span id="storyLocation"></span><button id="storyNext" class="pixel-button">CONTINUA →</button></div></div>
+ </div>
+ <button id="storyView" class="pixel-button story-view" aria-pressed="false">GUARDA L’IMMAGINE</button>
+</div>
+<div class="overlay gallery-screen" id="galleryScreen" hidden role="dialog" aria-modal="true" aria-labelledby="galleryTitle"><div class="gallery-top"><div><span class="story-kicker">SETTE ATTI E UN EPILOGO</span><h2 id="galleryTitle">Le scene</h2></div><button id="closeGallery" class="pixel-button">TORNA AL MENU</button></div><div id="sceneList" class="scene-list"></div></div>
+<div class="overlay modal" id="resultScreen" hidden><div class="modal-card"><span class="eyebrow" id="resultEyebrow">ATTO COMPLETATO</span><h2 id="resultTitle">Si va avanti.</h2><p id="resultCopy"></p><div class="result-stats"><div>PUNTI<strong id="resultScore">0</strong></div><div>OGGETTI DISTRUTTI<strong id="resultObjects">0</strong></div></div><button class="primary" id="continueBtn">PROSSIMO ATTO <span>→</span></button></div></div>
+<div class="overlay modal" id="pauseScreen" hidden role="dialog" aria-modal="true" aria-labelledby="menuTitle"><div class="modal-card game-menu">
+<div class="menu-heading"><div><span class="eyebrow" id="menuStage">PARTITA IN PAUSA</span><h2 id="menuTitle">Un momento di tregua</h2></div><button class="primary" id="resumeBtn">RIPRENDI →</button></div>
+<div class="menu-grid"><div class="menu-settings">
+<button id="menuMusic" aria-pressed="true">♫ MUSICA ON</button><button id="menuAudio" aria-pressed="true">FX ON</button>
+<button id="saveBtn">SALVA LA PARTITA</button><button id="menuHelp">COMANDI</button><button id="menuFull">SCHERMO INTERO</button>
+<button id="restartBtn">RICOMINCIA</button>
+</div><div class="menu-details"><dl><div><dt>Punti</dt><dd id="menuScore">0</dd></div><div><dt>Record</dt><dd id="menuRecord">0</dd></div><div><dt>Motivazione</dt><dd id="menuEnergy">0 / 100</dd></div><div><dt>Persone liberate</dt><dd id="menuFreed">0</dd></div><div><dt>Allarme</dt><dd id="menuAlarm">0%</dd></div><div><dt>Oggetti distrutti</dt><dd id="menuObjects">0</dd></div></dl><p id="menuObjective"></p></div></div>
+<p id="menuAudioNotice" class="menu-audio-notice" role="status" hidden></p>
+<p id="saveNotice" role="status">Puoi salvare qui e riprendere dallo stesso punto su questo browser.</p>
+</div></div>
+<div class="overlay modal" id="helpScreen" hidden><div class="modal-card help-card"><span class="eyebrow">COME SI GIOCA</span><h2>Trova un passaggio.</h2><div class="help-grid">
+<p><kbd>MUOVITI · JOYSTICK / WASD / FRECCE</kbd><span>Puoi spostarti anche verso il fondo e il bordo della strada. Guarda i segnali a terra e allontanati dai colpi in arrivo.</span></p>
+<p><kbd>SPACCA · J</kbd><span>Colpisci gli oggetti per ottenere punti e recuperare motivazione. Puoi completare i livelli anche lasciandoli intatti.<br><br>Contro Trump e il Presidente, aspetta che le corazze aprano i pannelli.</span></p>
+<p><kbd>PROTEGGI · K TENUTO</kbd><span>Tienilo premuto per ridurre i danni. Se ti proteggi appena prima del colpo, puoi pararlo del tutto.<br><br>La protezione consuma motivazione. Restare fermo troppo a lungo ti espone alle prese.</span></p>
+<p><kbd>SALTA · SPAZIO</kbd><span>Usa il salto per evitare i colpi. Quando compaiono i bersagli delle bombe, spostati dalla zona segnata.</span></p>
+<p><kbd>CONVINCI · L</kbd><span>Spendi 40 punti motivazione per rivolgerti agli agenti vicini. Si fermano a riflettere per otto secondi: usa quel tempo per passare.<br><br>Convinci può anche interrompere una presa o liberare un manifestante fermato.</span></p>
+<p><kbd>AIUTI LUNGO LA STRADA</kbd><span>Nora e Maranza si alternano fra i livelli e hanno le stesse capacità. Il personaggio che incontri ti aiuta per qualche secondo a rompere gli oggetti.<br><br>Il manifestante con il megafono attira una pattuglia lontano da te. Gli agenti torneranno: un avviso ti dirà quando.</span></p>
+</div><p class="help-note"><b>SE TI AFFERRANO</b><br>Tieni una direzione per liberarti consumando motivazione, oppure usa Convinci. Se aspetti troppo, vieni arrestato.</p><button class="primary" id="closeHelp">SI PARTE <span>→</span></button></div></div>
+</section>
+<footer class="below"><span><b>01—07</b> DALLA STRADA AL PALAZZO</span><p>Il corteo va avanti. Guarda chi ti viene incontro.</p><span class="footer-key" id="footerKey"><kbd>ESC</kbd> PAUSA</span></footer>
+<p id="audioNotice" class="audio-notice" role="status" hidden></p>
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>
