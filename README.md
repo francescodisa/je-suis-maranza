@@ -64,4 +64,4 @@ I test coprono le regole, i salvataggi e due campagne complete, con e senza dist
 
 I salvataggi restano nel browser e sono legati all’indirizzo del sito. Cambiando hosting, i salvataggi del vecchio indirizzo non vengono trasferiti automaticamente.
 
-Le immagini sono state create per il progetto; le due musiche sono state fornite dall’autore. Provenienza in docs/art-v3.md, docs/art-v4.md e docs/art-v10.md. La licenza di riutilizzo del progetto resta da definire dall’autore.
+Le immagini sono state create per il progetto; le due musiche sono state fornite dall’autore. Provenienza in docs/art-v3.md, docs/art-v4.md e docs/art-v10.md. Il progetto è distribuito secondo Apache License 2.0; consulta il file [LICENSE](LICENSE) per il testo integrale.
