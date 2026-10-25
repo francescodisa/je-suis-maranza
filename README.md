@@ -1,6 +1,6 @@
 # Je suis Maranza
 
-Arcade satirico in pixel art, versione 6.0.0 / Insieme 10. Sette atti dal quartiere popolare ai palazzi del potere, con Nora e Maranza alternati e due boss finali che fuggono illesi. I dialoghi sono finzione satirica.
+Arcade satirico in pixel art, versione 6.2.1. Sette atti dal quartiere popolare ai palazzi del potere, con Nora e Maranza alternati e due boss finali che fuggono illesi. I dialoghi sono finzione satirica.
 
 <p align="center"><img src="docs/instagram/cover.png" alt="Copertina di Je suis Maranza" width="680"></p>
 
@@ -65,15 +65,3 @@ I test coprono le regole, i salvataggi e due campagne complete, con e senza dist
 I salvataggi restano nel browser e sono legati all’indirizzo del sito. Cambiando hosting, i salvataggi del vecchio indirizzo non vengono trasferiti automaticamente.
 
 Le immagini sono state create per il progetto; le due musiche sono state fornite dall’autore. Provenienza in docs/art-v3.md, docs/art-v4.md e docs/art-v10.md. La licenza di riutilizzo del progetto resta da definire dall’autore.
-
-## Aggiornamento 6.1.0
-
-Testi italiani rivisti, dialoghi di Convinci e fumetti compatti su cellulare. I messaggi lunghi passano in pagine di due righe, senza coprire i personaggi.
-
-## Aggiornamento 6.2.0
-
-La difficoltà precedente è ora Facile. Normale e Difficile aumentano velocità degli inseguimenti, tentativi di arresto e pressione dei boss, riducendo i recuperi. Gli attacchi restano segnalati e la distruzione degli oggetti è facoltativa. Le campagne automatiche passano in tutte le modalità, anche senza distruzioni. I vecchi salvataggi vengono aggiornati conservando atto, punti e risorse.
-
-## Aggiornamento 6.2.1
-
-Dopo vittoria e sconfitta, il pulsante Schermata iniziale torna alla copertina, mantenendo il risultato e l’epilogo prima del ritorno. Anche Ricomincia nel menu porta alla copertina, dove si può scegliere la difficoltà e avviare una nuova partita.
