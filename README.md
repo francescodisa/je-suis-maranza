@@ -2,6 +2,13 @@
 
 Arcade satirico in pixel art, versione 6.0.0 / Insieme 10. Sette atti dal quartiere popolare ai palazzi del potere, con Nora e Maranza alternati e due boss finali che fuggono illesi. I dialoghi sono finzione satirica.
 
+<p align="center"><img src="docs/instagram/cover.png" alt="Copertina di Je suis Maranza" width="680"></p>
+
+<p align="center">
+  <img src="docs/instagram/gameplay-strada.png" alt="Gameplay nel quartiere" width="48%">
+  <img src="docs/instagram/gameplay-convinci.png" alt="Gameplay: convinci gli agenti" width="48%">
+</p>
+
 ## Avvio locale
 
 Serve Node.js 20 o successivo. Dalla cartella del progetto:
