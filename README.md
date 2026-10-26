@@ -1,67 +1,80 @@
 # Je suis Maranza
 
-Arcade satirico in pixel art, versione 6.2.1. Sette atti dal quartiere popolare ai palazzi del potere, con Nora e Maranza alternati e due boss finali che fuggono illesi. I dialoghi sono finzione satirica.
+**Il privilegio ha i vetri fragili.**
+
+Je suis Maranza è un arcade satirico in pixel art per browser. Maranza e Nora attraversano sette atti, dal quartiere popolare ai palazzi del potere, fra cortei, inseguimenti e incontri con chi può dare una mano. La città cambia strada dopo strada: cambiano le vetrine, le automobili e il modo in cui il potere si difende.
 
 <p align="center"><img src="docs/instagram/cover.png" alt="Copertina di Je suis Maranza" width="680"></p>
 
 <p align="center">
-  <img src="docs/instagram/gameplay-strada.png" alt="Gameplay nel quartiere" width="48%">
-  <img src="docs/instagram/gameplay-convinci.png" alt="Gameplay: convinci gli agenti" width="48%">
+  <img src="docs/instagram/gameplay-strada.png" alt="Maranza attraversa il quartiere popolare" width="48%">
+  <img src="docs/instagram/gameplay-convinci.png" alt="Nora usa Convinci per aprirsi un passaggio" width="48%">
 </p>
+
+## Il gioco
+
+Raggiungi la fine di ogni scenario evitando manganellate e arresti. Puoi rompere gli oggetti per recuperare motivazione, proteggerti o usare **Convinci** per aprire un passaggio fra gli agenti. La distruzione è facoltativa: il percorso può essere completato anche senza rompere nulla.
+
+- Sette atti con Maranza e Nora alternati, scene narrative e incontri finali.
+- Tre difficoltà: Facile, Normale e Difficile.
+- Comandi da tastiera e controlli touch per telefono e tablet.
+- Salvataggio della partita nel browser.
+- Musica ed effetti sonori regolabili dal menu.
+
+Personaggi, dialoghi e situazioni appartengono a una finzione satirica.
+
+## Comandi
+
+| Azione | Tastiera |
+| --- | --- |
+| Muoversi | WASD oppure frecce |
+| Colpire gli oggetti | J |
+| Proteggersi | K tenuto premuto |
+| Saltare | Spazio |
+| Convinci | L |
+| Pausa / menu | Esc |
+| Proseguire nei dialoghi | Invio oppure Spazio |
+
+Su schermo touch sono disponibili joystick e pulsanti. Su telefono è consigliato l’orientamento orizzontale.
+
+I salvataggi sono legati al browser e all’indirizzo da cui si gioca. Per riprendere una partita, usa lo stesso browser sullo stesso sito.
 
 ## Avvio locale
 
-Serve Node.js 20 o successivo. Dalla cartella del progetto:
+Richiede **Node.js 20 o successivo**.
 
 ```sh
+git clone https://github.com/francescodisa/je-suis-maranza.git
+cd je-suis-maranza
 npm start
 ```
 
-Apri http://127.0.0.1:8080. Non serve `npm install`: il progetto non ha dipendenze runtime. La cartella `dist` contiene già il gioco completo; non occorre compilarlo. L’apertura diretta di index.html con doppio clic può bloccare i moduli JavaScript: usa il server locale.
+Apri [http://127.0.0.1:8080](http://127.0.0.1:8080) nel browser. Il progetto non ha dipendenze runtime e non richiede installazione di pacchetti o compilazione: `dist/` contiene già il gioco completo.
 
-## Pubblicazione
+Il gioco usa moduli JavaScript e va aperto attraverso un server HTTP, come quello avviato da `npm start`.
 
-Puoi caricare direttamente il contenuto di `dist` su un hosting statico, senza collegare GitHub. Segui [PUBBLICAZIONE.md](PUBBLICAZIONE.md) per Cloudflare Pages Direct Upload o itch.io. Il pacchetto web fornito separatamente ha già index.html alla radice.
+## Sviluppo
 
-## GitHub
+Il gioco è realizzato in JavaScript con rendering su canvas, grafica e audio inclusi nel repository.
 
-Crea un repository vuoto, estrai questo archivio e carica il contenuto della cartella `je-suis-maranza`, mantenendo le sottocartelle. Sono inclusi codice, immagini, musiche e test; la cronologia Git e la configurazione del precedente hosting sono escluse. Non è presente alcuna pubblicazione automatica.
+| Percorso | Contenuto |
+| --- | --- |
+| `dist/` | Gioco completo, codice e asset |
+| `tests/` | Test automatici |
+| `docs/` | Documentazione, provenienza degli asset e anteprime |
+| `scripts/serve.mjs` | Server per l’avvio locale |
 
-Per caricare con Git, dopo avere creato il repository, sostituisci l’URL nell’ultimo comando con quello del repository scelto:
-
-```sh
-git init
-git add .
-git commit -m "Initial release"
-git branch -M main
-git remote add origin URL_DEL_REPOSITORY
-git push -u origin main
-```
-
-Per i file multimediali più grandi conviene Git da terminale o GitHub Desktop. GitHub può essere usato soltanto per custodire il sorgente; l’hosting resta indipendente.
-
-## Regole e comandi
-
-Raggiungi la fine di ogni scenario evitando manganellate e arresti. Gli oggetti sono facoltativi; romperli ricarica la motivazione per proteggersi e persuadere gli agenti. La polizia è immune agli attacchi del giocatore. Trump e il Presidente usano corazze meccaniche; quando cedono, i boss scappano e il corteo prosegue.
-
-WASD/frecce per muoverti, J per gli oggetti, K tenuto per proteggerti, spazio per saltare e L per convincere. Su telefono sono disponibili joystick e pulsanti; è preferibile l’orientamento orizzontale. Musica ed effetti sono disattivabili dal menu.
-
-## Verifica
+Per controllare la sintassi ed eseguire i test:
 
 ```sh
 npm run check
 npm test
 ```
 
-I test coprono le regole, i salvataggi e due campagne complete, con e senza distruzioni. Dettagli del bilanciamento in docs/qa-v12.md e della navigazione in docs/qa-v13.md.
+La suite comprende regole di gioco, bilanciamento, audio, controlli mobile, dialoghi e salvataggi.
 
-## Struttura
+## Crediti e licenza
 
-- dist: gioco pronto per il web, compresi tutti gli asset.
-- tests: test automatici eseguibili con Node.
-- docs: provenienza grafica, verifiche e anteprime.
-- scripts/serve.mjs: server locale senza dipendenze.
+Le immagini sono state create per il progetto; le due musiche sono state fornite dall’autore. La documentazione sulla provenienza degli asset è in [art-v3](docs/art-v3.md), [art-v4](docs/art-v4.md) e [art-v10](docs/art-v10.md).
 
-I salvataggi restano nel browser e sono legati all’indirizzo del sito. Cambiando hosting, i salvataggi del vecchio indirizzo non vengono trasferiti automaticamente.
-
-Le immagini sono state create per il progetto; le due musiche sono state fornite dall’autore. Provenienza in docs/art-v3.md, docs/art-v4.md e docs/art-v10.md. Il progetto è distribuito secondo Apache License 2.0; consulta il file [LICENSE](LICENSE) per il testo integrale.
+Il progetto è distribuito con **Apache License 2.0**. Il testo integrale è nel file [LICENSE](LICENSE).
